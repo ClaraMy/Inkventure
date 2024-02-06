@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -29,7 +31,12 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
         float horizontalMovement = Input.GetAxisRaw("Horizontal") * m_Speed * Time.deltaTime;
 
-        Move(horizontalMovement);   
+        Move(horizontalMovement);
+
+        Flip(rb.velocity.x);
+
+        float characterVelocity = Mathf.Abs(rb.velocity.x);
+        animator.SetFloat("Speed", characterVelocity);
     }
 
     void Move(float _horizontalMovement)
@@ -40,6 +47,17 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(new Vector2(rb.velocity.x, m_JumpHeight * 10));
+        }
+    }
+
+    void Flip(float _velocity)
+    {
+        if(_velocity > 0.1f)
+        {
+            spriteRenderer.flipX = false;
+        } else if (_velocity < -0.1f)
+        {
+            spriteRenderer.flipX = true;
         }
     }
 }
