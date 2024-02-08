@@ -29,4 +29,13 @@ public class EnemyPatrol : MonoBehaviour
             pig1.flipX = !pig1.flipX;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.CompareTag("Player"))
+        {
+            PlayerLife playerLife = collision.transform.GetComponent<PlayerLife>();
+            playerLife.TakeDamage();
+        }
+    }
 }
