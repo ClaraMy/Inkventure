@@ -12,10 +12,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_JumpHeight = 1.0f;
     [SerializeField] private float m_TurnSmoothTime = 0.1f;
 
-    [SerializeField] private Transform groundCheckLeft;
-    [SerializeField] private Transform groundCheckRight;
+    [SerializeField] private Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask collisionLayers;
 
     private bool isGrounded;
+    private float horizontalMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -25,19 +27,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    
-
-    private void FixedUpdate()
+    void Update()
     {
-        isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
-        float horizontalMovement = Input.GetAxisRaw("Horizontal") * m_Speed * Time.deltaTime;
-
-        Move(horizontalMovement);
-
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
+        horizontalMovement = Input.GetAxisRaw("Horizontal") * m_Speed * Time.deltaTime;
         Flip(rb.velocity.x);
 
         float characterVelocity = Mathf.Abs(rb.velocity.x);
         animator.SetFloat("Speed", characterVelocity);
+    }
+    private void FixedUpdate()
+    {
+        Move(horizontalMovement);
     }
 
     void Move(float _horizontalMovement)
@@ -60,5 +61,10 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }
