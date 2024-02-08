@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
         horizontalMovement = Input.GetAxisRaw("Horizontal") * m_Speed * Time.deltaTime;
         Flip(rb.velocity.x);
 
@@ -38,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
         Move(horizontalMovement);
     }
 
