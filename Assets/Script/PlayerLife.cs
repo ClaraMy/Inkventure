@@ -14,8 +14,6 @@ public class PlayerLife : MonoBehaviour
     public float invincibilityDelay = 2f;
     public float invincibilityAnimationDelay = 0.8f;
     public bool isInvincible = false;
-
-
     private void Awake()
     {
         health = 3;
@@ -44,10 +42,31 @@ public class PlayerLife : MonoBehaviour
         if (!isInvincible)
         {
             health -= 1;
+
+            // pour vérifier si le joueur est toujours vivant
+            if(health == 0)
+            {
+                Die();
+                return;
+            }
+
             isInvincible = true;
             StartCoroutine(InvincibilityFlash());
             StartCoroutine(HandleInvincibilityDelay());
         }
+    }
+
+    public void Die()
+    {
+        // pour bloquer les mouvements du personnage
+        PlayerMovement.instance.enabled = false;
+
+        // pour activer l'animation du personnage
+        PlayerMovement.instance.animator.SetTrigger("Die");
+
+        // pour retirer toute interaction avec l'environnement
+        PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
+        PlayerMovement.instance.playerCollider.enabled = false;
     }
 
     public IEnumerator InvincibilityFlash()
@@ -68,4 +87,6 @@ public class PlayerLife : MonoBehaviour
         yield return new WaitForSeconds(invincibilityDelay);
         isInvincible = false;
     }
+
+    
 }
