@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalMovement = Input.GetAxisRaw("Horizontal") * m_Speed * Time.deltaTime;
+        horizontalMovement = Input.GetAxisRaw("Horizontal") * m_Speed * Time.fixedDeltaTime;
         Flip(rb.velocity.x);
 
         float characterVelocity = Mathf.Abs(rb.velocity.x);

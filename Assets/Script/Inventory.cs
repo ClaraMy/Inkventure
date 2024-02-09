@@ -24,4 +24,10 @@ public class Inventory : MonoBehaviour
         diamondsCountText.text = "x " + diamondsCount.ToString();
     }
 
+    public void RemoveDiamonds(int count)
+    {
+        diamondsCount -= count;
+        diamondsCountText.text = "x " + diamondsCount.ToString();
+    }
+
 }

@@ -7,6 +7,7 @@ public class PickUpDiamond : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Inventory.instance.AddDiamonds(1);
+            CurrentSceneManager.instance.diamondsPickedUpInThisSceneCount++;
             Destroy(gameObject);
         }
     }

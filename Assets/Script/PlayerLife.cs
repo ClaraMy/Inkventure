@@ -5,7 +5,8 @@ using System.Collections;
 public class PlayerLife : MonoBehaviour
 {
     private Animator animator;
-    public static int health = 3;
+    public static int health;
+    private int maxHealth = 3;
 
     public Image[] hearts;
     public Sprite fullHeart;
@@ -14,9 +15,21 @@ public class PlayerLife : MonoBehaviour
     public float invincibilityDelay = 2f;
     public float invincibilityAnimationDelay = 0.8f;
     public bool isInvincible = false;
+    public static PlayerLife instance;
     private void Awake()
     {
-        health = 3;
+        // pour vérifier qu'il n'y a qu'une seule instance de PlayerLife dans la scène
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Attention, il y a plus d'une instance de PlayerLife dans la scène");
+            Destroy(gameObject);
+        }
+
+        health = maxHealth;
     }
     private void Start()
     {
@@ -67,6 +80,25 @@ public class PlayerLife : MonoBehaviour
         // pour retirer toute interaction avec l'environnement
         PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
         PlayerMovement.instance.playerCollider.enabled = false;
+
+        // pour appeler la fonction d'apparation du Game Over
+        GameOverManager.instance.OnPlayerDeath();
+    }
+
+    public void Respawn()
+    {
+        // pour réactiver les mouvements du personnage
+        PlayerMovement.instance.enabled = true;
+
+        // pour activer l'animation du personnage
+        PlayerMovement.instance.animator.SetTrigger("Respawn");
+
+        // pour réactiver les interactions du joueur avec l'environnement
+        PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Dynamic;
+        PlayerMovement.instance.playerCollider.enabled = true;
+
+        // pour remettre la vie au joueur
+        health = maxHealth;
     }
 
     public IEnumerator InvincibilityFlash()
