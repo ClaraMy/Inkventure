@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CurrentSceneManager : MonoBehaviour
 {
-    public bool isPlayerPresentByDefault = false;
     public int diamondsPickedUpInThisSceneCount;
+    public Vector3 respawnPoint;
     public static CurrentSceneManager instance;
     private void Awake()
     {
@@ -17,5 +17,7 @@ public class CurrentSceneManager : MonoBehaviour
             Debug.LogWarning("Attention, il y a plus d'une instance de CurrentSceneManager dans la scène");
             Destroy(gameObject);
         }
+
+        respawnPoint = GameObject.FindGameObjectWithTag("Player").transform.position;
     }
 }

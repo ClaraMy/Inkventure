@@ -3,14 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
-    public string levelToLoad;
-
     public GameObject settingsWindow;
 
     public void StartGameButton()
     {
-        SceneManager.LoadScene(levelToLoad);
+        SceneManager.LoadScene("LevelSelect");
     }
 
     public void SettingsButton()
