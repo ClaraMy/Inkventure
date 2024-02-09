@@ -80,6 +80,7 @@ public class PlayerLife : MonoBehaviour
         // pour retirer toute interaction avec l'environnement
         PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
         PlayerMovement.instance.playerCollider.enabled = false;
+        PlayerMovement.instance.rb.velocity = Vector3.zero;
 
         // pour appeler la fonction d'apparation du Game Over
         GameOverManager.instance.OnPlayerDeath();
