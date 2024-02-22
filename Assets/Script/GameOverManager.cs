@@ -25,7 +25,7 @@ public class GameOverManager : MonoBehaviour
         gameOverUI.SetActive(true);
     }
 
-    public void RetryButton()
+    public void Retry()
     {
         // pour recharger la scène
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -40,12 +40,12 @@ public class GameOverManager : MonoBehaviour
         gameOverUI.SetActive(false);
     }
 
-    public void MainMenuButton()
+    public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void QuitButton()
+    public void Quit()
     {
         Application.Quit();
     }
