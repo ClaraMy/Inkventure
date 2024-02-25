@@ -1,48 +1,80 @@
+using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Timeline;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
-    private GameObject attackArea = default;
+    private SpriteRenderer m_SpriteRenderer;
 
     private bool isAttacking = false;
-
-    private float timeToAttack = 0.25f;
     private float timer = 0f;
+    private Vector3 attackOffset;
 
-    // Start is called before the first frame update
+    [SerializeField] private float timeToAttack = 0.25f;
+    [SerializeField] private GameObject RightAttackArea = default;
+    [SerializeField] private GameObject LeftAttackArea = default;
+
     void Start()
     {
         animator = GetComponent<Animator>();
-        attackArea = transform.GetChild(1).gameObject; //changer de selector ici
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Attack();
-        }
-
+        // If the player is currently attacking, keep track of the time elapsed since the start of the attack
         if (isAttacking)
         {
             timer += Time.deltaTime;
 
-            if(timer >= timeToAttack)
+            // If the time to attack has elapsed, reset the attack parameters
+            if (timer >= timeToAttack)
             {
                 timer = 0;
                 isAttacking = false;
-                attackArea.SetActive(isAttacking);
+
+                // Deactivate attack colliders and update animator parameter
+                RightAttackArea.SetActive(isAttacking);
+                LeftAttackArea.SetActive(isAttacking);
                 animator.SetBool("IsAttacking", isAttacking);
             }
         }
     }
 
+    /// <summary>
+    /// Reads attack input from the player.
+    /// </summary>
+    /// <param name="context">The input context from the Input System.</param>
+    public void ReadAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Attack();
+        }
+    }
+
+    /// <summary>
+    /// Makes the player attack.
+    /// </summary>
     private void Attack()
     {
         isAttacking = true;
-        attackArea.SetActive(isAttacking);
+
+        // Update animator parameter to trigger attack animation
         animator.SetBool("IsAttacking", isAttacking);
+
+        // Determine the direction of the attack based on the player's facing direction
+        if (m_SpriteRenderer.flipX == false)
+        {
+            // Activate the appropriate attack collider based on the direction
+            RightAttackArea.SetActive(isAttacking);
+        }
+        else
+        {
+            LeftAttackArea.SetActive(isAttacking);
+        }
     }
 }

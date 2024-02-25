@@ -4,106 +4,123 @@ using System.Collections;
 
 public class PlayerLife : MonoBehaviour
 {
+    private const int MAX_HEALTH = 3;
+    private static int m_Health;
+
+    private bool isInvincible = false;
+
     private Animator animator;
     private CapsuleCollider2D playerCollider;
-    public static int health;
-    private int maxHealth = 3;
+    private Rigidbody2D rb;
 
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
+    [SerializeField] private Image[] m_Hearts;
+    [SerializeField] private Sprite m_FullHeart;
+    [SerializeField] private Sprite m_EmptyHeart;
 
-    public float invincibilityDelay = 2f;
-    public float invincibilityAnimationDelay = 0.8f;
-    public bool isInvincible = false;
+    [SerializeField] private float m_InvincibilityDelay = 2f;
+    [SerializeField] private float m_InvincibilityAnimationDelay = 0.8f;
+
     public static PlayerLife instance;
     private void Awake()
     {
-        // pour vérifier qu'il n'y a qu'une seule instance de PlayerLife dans la scène
-        if (instance == null)
+        // Ensure there is only one instance of PlayerLife in the scene
+        if (instance != null)
         {
-            instance = this;
-        }
-        else
-        {
-            Debug.LogWarning("Attention, il y a plus d'une instance de PlayerLife dans la scène");
-            Destroy(gameObject);
+            Debug.LogWarning("There is more than one instance of PlayerLife in the scene");
+            return;
         }
 
-        health = maxHealth;
+        instance = this;
+
+        // Set the player's health to maximum health
+        m_Health = MAX_HEALTH;
     }
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        foreach (Image img in hearts)
+        // Update the hearts UI based on player health
+        foreach (Image img in m_Hearts)
         {
-            img.sprite = emptyHeart;
+            img.sprite = m_EmptyHeart;
         }
 
-        for (int i = 0; i < health; i++)
+        for (int i = 0; i < m_Health; i++)
         {
-            hearts[i].sprite = fullHeart;
+            m_Hearts[i].sprite = m_FullHeart;
         }
     }
 
+    /// <summary>
+    /// Deals damage to the player.
+    /// </summary>
     public void TakeDamage()
     {
         if (!isInvincible)
         {
-            health -= 1;
+            m_Health -= 1;
 
-            // pour vérifier si le joueur est toujours vivant
-            if(health == 0)
+            // Check if the player is still alive
+            if (m_Health == 0)
             {
                 Die();
                 return;
             }
 
+            // Make the player temporarily invincible
             isInvincible = true;
             StartCoroutine(InvincibilityFlash());
             StartCoroutine(HandleInvincibilityDelay());
         }
     }
 
+    /// <summary>
+    /// Handles the death of the player.
+    /// </summary>
     public void Die()
     {
-        // pour bloquer les mouvements du personnage
+        // Disable player movement
         PlayerMovement.instance.enabled = false;
 
-        // pour activer l'animation du personnage
-        PlayerMovement.instance.animator.SetTrigger("Die");
+        // Trigger death animation
+        animator.SetTrigger("Die");
 
-        // pour retirer toute interaction avec l'environnement
-        PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
+        // Disable interaction with the environment
+        rb.bodyType = RigidbodyType2D.Kinematic;
         playerCollider.enabled = false;
-        PlayerMovement.instance.rb.velocity = Vector3.zero;
+        rb.velocity = Vector3.zero;
 
-        // pour appeler la fonction d'apparation du Game Over
+        // Call Game Over function
         GameOverManager.instance.OnPlayerDeath();
     }
 
+    /// <summary>
+    /// Respawns the player.
+    /// </summary>
     public void Respawn()
     {
-        // pour réactiver les mouvements du personnage
+        // Re-enable player movement
         PlayerMovement.instance.enabled = true;
 
-        // pour activer l'animation du personnage
-        PlayerMovement.instance.animator.SetTrigger("Respawn");
+        // Trigger respawn animation
+        animator.SetTrigger("Respawn");
 
-        // pour réactiver les interactions du joueur avec l'environnement
-        PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Dynamic;
-        PlayerMovement.instance.playerCollider.enabled = true;
+        // Re-enable interaction with the environment
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        playerCollider.enabled = true;
 
-        // pour remettre la vie au joueur
-        health = maxHealth;
+        // Reset player health
+        m_Health = MAX_HEALTH;
     }
 
+    /// <summary>
+    /// Flashes the player to indicate invincibility.
+    /// </summary>
     public IEnumerator InvincibilityFlash()
     {
         if (isInvincible)
@@ -111,15 +128,18 @@ public class PlayerLife : MonoBehaviour
             if (animator != null)
             {
                 animator.SetBool("IsInvincible", true);
-                yield return new WaitForSeconds(invincibilityAnimationDelay);
+                yield return new WaitForSeconds(m_InvincibilityAnimationDelay);
                 animator.SetBool("IsInvincible", false);
             }
         }
     }
 
+    /// <summary>
+    /// Handles the delay for player invincibility.
+    /// </summary>
     public IEnumerator HandleInvincibilityDelay()
     {
-        yield return new WaitForSeconds(invincibilityDelay);
+        yield return new WaitForSeconds(m_InvincibilityDelay);
         isInvincible = false;
     }
 

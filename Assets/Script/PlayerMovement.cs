@@ -7,121 +7,156 @@ public class PlayerMovement : MonoBehaviour
 {
     private const float GRAVITY_VALUE = -19.81f;
 
-    public Rigidbody2D rb;
-    public Animator animator;
-    public SpriteRenderer spriteRenderer;
-    public CapsuleCollider2D playerCollider;
-
-    private Vector3 velocity = Vector3.zero;
-    private Vector2 m_MoveVector;
     private float m_JumpVelocity;
+    private float m_HorizontalInput;
 
-    [SerializeField] private float m_Speed = 7.0f;  
+    private Vector3 m_Velocity = Vector3.zero;
+    private Vector2 m_MoveVector;
+
+    private bool m_IsGrounded;
+
+    private Animator m_Animator;
+    private SpriteRenderer m_SpriteRenderer;
+    private Rigidbody2D m_Rigidbody;
+    
+
+    [SerializeField] private float m_Speed = 7.0f;
     [SerializeField] private float m_JumpHeight = 7.0f;
     [SerializeField] private float m_TurnSmoothTime = 0.1f;
-     
-    [SerializeField] private Transform groundCheck;
-    public float groundCheckRadius;
-    private float horizontalInput;
-    public LayerMask collisionLayers;
+    [SerializeField] private float m_GroundCheckRadius = 0.5f;
 
-    private bool isGrounded;
+    [SerializeField] private Transform m_GroundCheck;
+    [SerializeField] private LayerMask m_CollisionLayers = default;
 
     public static PlayerMovement instance;
 
     private void Awake()
     {
+        // Check if there is more than one instance in the scene
         if(instance != null)
         {
-            Debug.LogWarning("Attention, il y a plus d'une instance de PlayerMovement dans la scène");
+            Debug.LogWarning("There is more than one instance of PlayerMovement in the scene");
             return;
         }
 
         instance = this;
     }
-
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        playerCollider = GetComponent<CapsuleCollider2D>();
+        m_Rigidbody = GetComponent<Rigidbody2D>();
+        m_Animator = GetComponent<Animator>();
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        Flip(horizontalInput);
+        // Flip the player sprite based on input
+        Flip(m_HorizontalInput);
 
-        float characterVelocity = Mathf.Abs(horizontalInput);
-        animator.SetFloat("Speed", characterVelocity);
+        // Set animator parameter for character speed
+        float characterVelocity = Mathf.Abs(m_HorizontalInput);
+        m_Animator.SetFloat("Speed", characterVelocity);
     }
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
+        // Check if the player is grounded
+        m_IsGrounded = Physics2D.OverlapCircle(m_GroundCheck.position, m_GroundCheckRadius, m_CollisionLayers);
+
+        // Move the player and apply gravity
         Move(m_MoveVector);
         ApplyGravity();
     }
 
+    /// <summary>
+    /// Reads the move input from the player.
+    /// </summary>
+    /// <param name="context">The input context from the Input System.</param>
     public void ReadMoveInput(InputAction.CallbackContext context)
     {
         m_MoveVector = context.ReadValue<Vector2>();
-        horizontalInput = m_MoveVector.x;
+        m_HorizontalInput = m_MoveVector.x;
     }
 
+    /// <summary>
+    /// Reads the jump input from the player.
+    /// </summary>
+    /// <param name="context">The input context from the Input System.</param>
     public void ReadJumpInput(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (isGrounded)
+            if (m_IsGrounded)
             {
+                // Jump only if the player is grounded
                 Jump();
             }
         }
     }
 
+    /// <summary>
+    /// Moves the player based on the input vector.
+    /// </summary>
+    /// <param name="m_MoveVector">The movement vector input.</param>
     public void Move(Vector2 m_MoveVector)
     {
-        Vector3 targetVelocity = new Vector2(m_MoveVector.x * m_Speed, rb.velocity.y);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_TurnSmoothTime);
+        Vector3 targetVelocity = new Vector2(m_MoveVector.x * m_Speed, m_Rigidbody.velocity.y);
+        m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_TurnSmoothTime);
     }
 
+    /// <summary>
+    /// Applies gravity to the player.
+    /// </summary>
     private void ApplyGravity()
     {
-        if (isGrounded)
+        if (m_IsGrounded)
         {
             if (m_JumpVelocity < 0)
             {
+                // Reset gravity value if the player is grounded
                 m_JumpVelocity = 0f;
             }
         }
         else
         {
+            // Apply gravity if the player is not grounded
             m_JumpVelocity += GRAVITY_VALUE * Time.deltaTime;
         }
 
+        // Apply vertical movement due to gravity
         transform.Translate(Vector3.up * m_JumpVelocity * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Makes the player jump.
+    /// </summary>
     private void Jump()
     {
+        // Calculate and apply jump velocity
         m_JumpVelocity += Mathf.Sqrt(m_JumpHeight * -GRAVITY_VALUE);
-        //rb.velocity = new Vector2(rb.velocity.x, m_JumpHeight);
     }
 
-    void Flip(float _horizontalInput)
+    /// <summary>
+    /// Flips the player sprite based on the horizontal input.
+    /// </summary>
+    /// <param name="m_HorizontalInput">The horizontal input value.</param>
+    void Flip(float m_HorizontalInput)
     {
-        if(_horizontalInput> 0.1f)
+        if(m_HorizontalInput> 0.1f)
         {
-            spriteRenderer.flipX = false;
-        } else if (_horizontalInput < -0.1f)
+            // Flip the player sprite to face right
+            m_SpriteRenderer.flipX = false;
+        } else if (m_HorizontalInput < -0.1f)
         {
-            spriteRenderer.flipX = true;
+            // Flip the player sprite to face left
+            m_SpriteRenderer.flipX = true;
         }
     }
+
+    /// <summary>
+    /// Draws the ground check radius in the Unity editor.
+    /// </summary>
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(m_GroundCheck.position, m_GroundCheckRadius);
     }
 }

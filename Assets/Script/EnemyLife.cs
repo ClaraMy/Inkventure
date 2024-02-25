@@ -26,7 +26,7 @@ public class EnemyLife : MonoBehaviour
     {
         health -= 1;
 
-        // pour vérifier si le joueur est toujours vivant
+        // pour vérifier si l'ennemi est toujours vivant
         if (health == 0)
         {
             Die();
