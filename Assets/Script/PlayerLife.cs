@@ -5,6 +5,7 @@ using System.Collections;
 public class PlayerLife : MonoBehaviour
 {
     private Animator animator;
+    private CapsuleCollider2D playerCollider;
     public static int health;
     private int maxHealth = 3;
 
@@ -34,6 +35,7 @@ public class PlayerLife : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -79,7 +81,7 @@ public class PlayerLife : MonoBehaviour
 
         // pour retirer toute interaction avec l'environnement
         PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
-        PlayerMovement.instance.playerCollider.enabled = false;
+        playerCollider.enabled = false;
         PlayerMovement.instance.rb.velocity = Vector3.zero;
 
         // pour appeler la fonction d'apparation du Game Over
