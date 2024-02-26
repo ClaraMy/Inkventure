@@ -6,14 +6,14 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private bool isAttacking = false;
+    private float timer = 0f;
+
+    [SerializeField] private float timeToAttack = 0.25f;
+
     private Animator animator;
     private SpriteRenderer m_SpriteRenderer;
 
-    private bool isAttacking = false;
-    private float timer = 0f;
-    private Vector3 attackOffset;
-
-    [SerializeField] private float timeToAttack = 0.25f;
     [SerializeField] private GameObject RightAttackArea = default;
     [SerializeField] private GameObject LeftAttackArea = default;
 

@@ -10,20 +10,19 @@ public class PlayerMovement : MonoBehaviour
     private float m_JumpVelocity;
     private float m_HorizontalInput;
 
-    private Vector3 m_Velocity = Vector3.zero;
-    private Vector2 m_MoveVector;
-
-    private bool m_IsGrounded;
-
-    private Animator m_Animator;
-    private SpriteRenderer m_SpriteRenderer;
-    private Rigidbody2D m_Rigidbody;
-    
-
     [SerializeField] private float m_Speed = 7.0f;
     [SerializeField] private float m_JumpHeight = 7.0f;
     [SerializeField] private float m_TurnSmoothTime = 0.1f;
     [SerializeField] private float m_GroundCheckRadius = 0.5f;
+
+    private bool m_IsGrounded;
+
+    private Vector3 m_Velocity = Vector3.zero;
+    private Vector2 m_MoveVector;
+
+    private Animator m_Animator;
+    private SpriteRenderer m_SpriteRenderer;
+    private Rigidbody2D m_Rigidbody;
 
     [SerializeField] private Transform m_GroundCheck;
     [SerializeField] private LayerMask m_CollisionLayers = default;

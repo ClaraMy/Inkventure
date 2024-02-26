@@ -4,36 +4,45 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public GameObject player;
-    public float timeOffset;
-    public Vector3 posOffset;
-    public float cameraOffsetX = 2f;
+    private float m_TargetX;
 
-    private float targetX;
-    private Vector3 velocity;
+    [SerializeField] private float m_TimeOffset = 0.5f;
+    [SerializeField] private float m_CameraOffsetX = 4f;
+
+    private Vector3 m_Velocity;
+
+    [SerializeField] private Vector3 m_PosOffset = new(0f, 1f, -10f);
+
+    private SpriteRenderer m_PlayerSprite;
+    private GameObject m_Player;
 
     private void Start()
     {
-        targetX = posOffset.x + cameraOffsetX;
+        m_TargetX = m_PosOffset.x + m_CameraOffsetX;
+        m_Player = PlayerMovement.instance.gameObject;
+        m_PlayerSprite = PlayerMovement.instance.GetComponent<SpriteRenderer>();
     }
-    // Update is called once per frame
+ 
     void Update()
     {
-        if (player != null)
+        // Check if the player GameObject is not null
+        if (m_Player != null)
         {
-            float horizontalMovement = Input.GetAxisRaw("Horizontal");
-
-            if (horizontalMovement > 0)
+            // Determine the target X position based on the player's direction
+            if (m_PlayerSprite.flipX == false)
             {
-                targetX = posOffset.x + cameraOffsetX;
+                m_TargetX = m_PosOffset.x + m_CameraOffsetX;
             }
-            else if (horizontalMovement < 0)
+            else
             {
-                targetX = posOffset.x - cameraOffsetX;
+                m_TargetX = m_PosOffset.x - m_CameraOffsetX;
             }
 
-            Vector3 targetPosition = new Vector3(targetX, posOffset.y, posOffset.z);
-            transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + targetPosition, ref velocity, timeOffset);
+            // Calculate the target position for the camera
+            Vector3 targetPosition = new Vector3(m_TargetX, m_PosOffset.y, m_PosOffset.z);
+
+            // Smoothly move the camera towards the target position
+            transform.position = Vector3.SmoothDamp(transform.position, m_Player.transform.position + targetPosition, ref m_Velocity, m_TimeOffset);
             
         }
     }

@@ -4639,11 +4639,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &454020548 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4735699339527570901, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
-  m_PrefabInstance: {fileID: 3453576347665677732}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &501513041
 GameObject:
   m_ObjectHideFlags: 0
@@ -16425,10 +16420,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 1946094055417055479, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3282820899200518401, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.11
@@ -16468,30 +16459,6 @@ PrefabInstance:
     - target: {fileID: 3282820899200518401, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6965342763596290558, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 454020548}
-    - target: {fileID: 6965342763596290558, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
-      propertyPath: timeOffset
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6965342763596290558, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
-      propertyPath: posOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6965342763596290558, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
-      propertyPath: posOffset.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6965342763596290558, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
-      propertyPath: posOffset.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6965342763596290558, guid: 5cfe97493f4b4ff4db9f0a4679d413c6, type: 3}
-      propertyPath: cameraOffsetX
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,6 +9,9 @@ public class PlayerLife : MonoBehaviour
 
     private bool isInvincible = false;
 
+    [SerializeField] private float m_InvincibilityDelay = 2f;
+    [SerializeField] private float m_InvincibilityAnimationDelay = 0.8f;
+
     private Animator animator;
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D rb;
@@ -16,9 +19,6 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private Image[] m_Hearts;
     [SerializeField] private Sprite m_FullHeart;
     [SerializeField] private Sprite m_EmptyHeart;
-
-    [SerializeField] private float m_InvincibilityDelay = 2f;
-    [SerializeField] private float m_InvincibilityAnimationDelay = 0.8f;
 
     public static PlayerLife instance;
     private void Awake()
