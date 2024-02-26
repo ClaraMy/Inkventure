@@ -16168,6 +16168,10 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 650897527}
+    - target: {fileID: 3863662639270252056, guid: c089fb48fbafc624badd21564aa6d29a, type: 3}
+      propertyPath: m_PauseMenuUI
+      value: 
+      objectReference: {fileID: 650897527}
     - target: {fileID: 6027594352294150168, guid: c089fb48fbafc624badd21564aa6d29a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.398566
@@ -16403,6 +16407,46 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4912359195962369633}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionId
+      value: 6a4e06de-e8d6-4f50-a256-6255a4467fd0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionName
+      value: UI/New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1522736662}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReadPauseInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

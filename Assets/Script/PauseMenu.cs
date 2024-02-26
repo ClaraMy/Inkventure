@@ -1,21 +1,29 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool gameIsPaused = false;
+    public static bool m_GameIsPaused = false;
 
-    public GameObject pauseMenuUI;
+    [SerializeField] private GameObject m_PauseMenuUI;
 
     private void Start()
     {
-        gameIsPaused = false;
+        // Ensure that the game starts in a non-paused state
+        m_GameIsPaused = false;
     }
-    void Update()
+
+    /// <summary>
+    /// Reads the pause input.
+    /// </summary>
+    /// <param name="context">The input context from the Input System.</param>
+    public void ReadPauseInput(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (context.performed)
         {
-            if (gameIsPaused)
+            // Toggle between pausing and resuming the game
+            if (m_GameIsPaused)
             {
                 Resume();
             }
@@ -26,44 +34,60 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pause the game.
+    /// </summary>
     private void Paused()
     {
-        // pour afficher le menu pause
-        pauseMenuUI.SetActive(true);
+        // Show the pause menu UI
+        m_PauseMenuUI.SetActive(true);
 
-        // pour arrêter le temps
+        // Stop the time to pause the game
         Time.timeScale = 0;
 
-        // pour changer le statut du jeu
-        gameIsPaused = true;
+        // Update the game pause status
+        m_GameIsPaused = true;
 
-        // pour arrêter les mouvements du joueur
+        // Disable player movement while paused
         PlayerMovement.instance.enabled = false;
     }
 
+    /// <summary>
+    /// Resume the game.
+    /// </summary>
     public void Resume()
     {
-        // pour retirer le menu pause
-        pauseMenuUI.SetActive(false);
+        // Hide the pause menu UI
+        m_PauseMenuUI.SetActive(false);
 
-        // pour remettre le temps normal
+        // Restore the normal time scale to resume the game
         Time.timeScale = 1;
 
-        // pour changer le statut du jeu
-        gameIsPaused = false;
+        // Update the game pause status
+        m_GameIsPaused = false;
 
-        // pour remettre les mouvements du joueur
+        // Enable player movement
         PlayerMovement.instance.enabled = true;
     }
 
+    /// <summary>
+    /// Return to the main menu.
+    /// </summary>
     public void MainMenu()
     {
+        // Resume the game before loading the main menu scene
         Resume();
+
+        // Load the main menu scene
         SceneManager.LoadScene("MainMenu");
     }
 
+    /// <summary>
+    /// Quit the game.
+    /// </summary>
     public void Quit()
     {
+        // Quit the application
         Application.Quit();
     }
 }
