@@ -7,39 +7,48 @@ public class PlayerLife : MonoBehaviour
     private const int MAX_HEALTH = 3;
     private static int m_Health;
 
-    private bool isInvincible = false;
+    private bool m_IsInvincible = false;
 
     [SerializeField] private float m_InvincibilityDelay = 2f;
     [SerializeField] private float m_InvincibilityAnimationDelay = 0.8f;
 
-    private Animator animator;
-    private CapsuleCollider2D playerCollider;
-    private Rigidbody2D rb;
+    private Animator m_Animator;
+    private CapsuleCollider2D m_PlayerCollider;
+    private Rigidbody2D m_Rigidbody;
 
     [SerializeField] private Image[] m_Hearts;
     [SerializeField] private Sprite m_FullHeart;
     [SerializeField] private Sprite m_EmptyHeart;
 
-    public static PlayerLife instance;
+    /// <summary>
+    /// Gets the singleton instance of the PlayerLife.
+    /// </summary>
+    #region Singleton
+    private static PlayerLife m_Instance;
+
+    public static PlayerLife Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = new PlayerLife();
+            }
+
+            return m_Instance;
+        }
+    }
+    #endregion
     private void Awake()
     {
-        // Ensure there is only one instance of PlayerLife in the scene
-        if (instance != null)
-        {
-            Debug.LogWarning("There is more than one instance of PlayerLife in the scene");
-            return;
-        }
-
-        instance = this;
-
-        // Set the player's health to maximum health
+        // Initialize health to the maximum value
         m_Health = MAX_HEALTH;
     }
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        playerCollider = GetComponent<CapsuleCollider2D>();
+        m_Rigidbody = GetComponent<Rigidbody2D>();
+        m_Animator = GetComponent<Animator>();
+        m_PlayerCollider = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -61,9 +70,12 @@ public class PlayerLife : MonoBehaviour
     /// </summary>
     public void TakeDamage()
     {
-        if (!isInvincible)
+        if (!m_IsInvincible)
         {
             m_Health -= 1;
+
+            // Disable player attack while player's taking damage
+            PlayerAttack.Instance.enabled = false;
 
             // Check if the player is still alive
             if (m_Health == 0)
@@ -73,7 +85,7 @@ public class PlayerLife : MonoBehaviour
             }
 
             // Make the player temporarily invincible
-            isInvincible = true;
+            m_IsInvincible = true;
             StartCoroutine(InvincibilityFlash());
             StartCoroutine(HandleInvincibilityDelay());
         }
@@ -85,15 +97,15 @@ public class PlayerLife : MonoBehaviour
     public void Die()
     {
         // Disable player movement
-        PlayerMovement.instance.enabled = false;
+        PlayerMovement.Instance.enabled = false;
 
         // Trigger death animation
-        animator.SetTrigger("Die");
+        m_Animator.SetTrigger("Die");
 
         // Disable interaction with the environment
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        playerCollider.enabled = false;
-        rb.velocity = Vector3.zero;
+        m_Rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        m_PlayerCollider.enabled = false;
+        m_Rigidbody.velocity = Vector3.zero;
 
         // Call Game Over function
         GameOverManager.instance.OnPlayerDeath();
@@ -105,14 +117,14 @@ public class PlayerLife : MonoBehaviour
     public void Respawn()
     {
         // Re-enable player movement
-        PlayerMovement.instance.enabled = true;
+        PlayerMovement.Instance.enabled = true;
 
         // Trigger respawn animation
-        animator.SetTrigger("Respawn");
+        m_Animator.SetTrigger("Respawn");
 
         // Re-enable interaction with the environment
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        playerCollider.enabled = true;
+        m_Rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        m_PlayerCollider.enabled = true;
 
         // Reset player health
         m_Health = MAX_HEALTH;
@@ -123,13 +135,13 @@ public class PlayerLife : MonoBehaviour
     /// </summary>
     public IEnumerator InvincibilityFlash()
     {
-        if (isInvincible)
+        if (m_IsInvincible)
         {
-            if (animator != null)
+            if (m_Animator != null)
             {
-                animator.SetBool("IsInvincible", true);
+                m_Animator.SetBool("IsInvincible", true);
                 yield return new WaitForSeconds(m_InvincibilityAnimationDelay);
-                animator.SetBool("IsInvincible", false);
+                m_Animator.SetBool("IsInvincible", false);
             }
         }
     }
@@ -140,7 +152,7 @@ public class PlayerLife : MonoBehaviour
     public IEnumerator HandleInvincibilityDelay()
     {
         yield return new WaitForSeconds(m_InvincibilityDelay);
-        isInvincible = false;
+        m_IsInvincible = false;
     }
 
     

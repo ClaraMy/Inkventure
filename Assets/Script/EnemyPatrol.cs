@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    [SerializeField] private float m_speed = 2.0f;
-    [SerializeField] public Transform[] waypoints;
+    [SerializeField] private float m_Speed = 2.0f;
+    [SerializeField] private Transform[] waypoints;
 
     public SpriteRenderer pig1;
     private Transform target;
@@ -23,7 +23,7 @@ public class EnemyPatrol : MonoBehaviour
         if (enemyLife.IsAlive())
         {
             Vector3 dir = target.position - transform.position;
-            transform.Translate(dir.normalized * m_speed * Time.deltaTime, Space.World);
+            transform.Translate(dir.normalized * m_Speed * Time.deltaTime, Space.World);
 
             // Si l'ennemi est presque arrivé à sa destination
             if (Vector3.Distance(transform.position, target.position) < 0.3f)

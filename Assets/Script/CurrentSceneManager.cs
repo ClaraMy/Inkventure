@@ -2,23 +2,26 @@ using UnityEngine;
 
 public class CurrentSceneManager : MonoBehaviour
 {
-    public int diamondsPickedUpInThisSceneCount;
-    public Vector3 respawnPoint;
-    public int levelToUnlock;
-    public static CurrentSceneManager instance;
-    private void Awake()
-    {
-        // pour vérifier qu'il n'y a qu'une seule instance de CurrentSceneManager dans la scène
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Debug.LogWarning("Attention, il y a plus d'une instance de CurrentSceneManager dans la scène");
-            Destroy(gameObject);
-        }
+    public int LevelToUnlock;
+    public int DiamondsPickedUpInThisSceneCount;
 
-        respawnPoint = GameObject.FindGameObjectWithTag("Player").transform.position;
+    /// <summary>
+    /// Gets the singleton instance of the Inventory.
+    /// </summary>
+    #region Singleton
+    private static CurrentSceneManager m_Instance;
+
+    public static CurrentSceneManager Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = new CurrentSceneManager();
+            }
+
+            return m_Instance;
+        }
     }
+    #endregion
 }

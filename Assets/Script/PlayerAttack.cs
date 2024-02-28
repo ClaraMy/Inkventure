@@ -6,40 +6,60 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private bool isAttacking = false;
-    private float timer = 0f;
+    private bool m_IsAttacking = false;
+    private float m_Timer = 0f;
 
-    [SerializeField] private float timeToAttack = 0.25f;
+    [SerializeField] private float m_TimeToAttack = 0.25f;
 
-    private Animator animator;
+    private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
 
-    [SerializeField] private GameObject RightAttackArea = default;
-    [SerializeField] private GameObject LeftAttackArea = default;
+    [SerializeField] private GameObject m_RightAttackArea = default;
+    [SerializeField] private GameObject m_LeftAttackArea = default;
+
+    /// <summary>
+    /// Gets the singleton instance of the PlayerAttack.
+    /// </summary>
+    #region Singleton
+    private static PlayerAttack m_Instance;
+
+    public static PlayerAttack Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = new PlayerAttack();
+            }
+
+            return m_Instance;
+        }
+    }
+    #endregion
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        m_Animator = GetComponent<Animator>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         // If the player is currently attacking, keep track of the time elapsed since the start of the attack
-        if (isAttacking)
+        if (m_IsAttacking)
         {
-            timer += Time.deltaTime;
+            m_Timer += Time.deltaTime;
 
             // If the time to attack has elapsed, reset the attack parameters
-            if (timer >= timeToAttack)
+            if (m_Timer >= m_TimeToAttack)
             {
-                timer = 0;
-                isAttacking = false;
+                m_Timer = 0;
+                m_IsAttacking = false;
 
                 // Deactivate attack colliders and update animator parameter
-                RightAttackArea.SetActive(isAttacking);
-                LeftAttackArea.SetActive(isAttacking);
-                animator.SetBool("IsAttacking", isAttacking);
+                m_RightAttackArea.SetActive(m_IsAttacking);
+                m_LeftAttackArea.SetActive(m_IsAttacking);
+                m_Animator.SetBool("IsAttacking", m_IsAttacking);
             }
         }
     }
@@ -61,20 +81,20 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     private void Attack()
     {
-        isAttacking = true;
+        m_IsAttacking = true;
 
         // Update animator parameter to trigger attack animation
-        animator.SetBool("IsAttacking", isAttacking);
+        m_Animator.SetBool("IsAttacking", m_IsAttacking);
 
         // Determine the direction of the attack based on the player's facing direction
         if (m_SpriteRenderer.flipX == false)
         {
             // Activate the appropriate attack collider based on the direction
-            RightAttackArea.SetActive(isAttacking);
+            m_RightAttackArea.SetActive(m_IsAttacking);
         }
         else
         {
-            LeftAttackArea.SetActive(isAttacking);
+            m_LeftAttackArea.SetActive(m_IsAttacking);
         }
     }
 }

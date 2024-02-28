@@ -16,9 +16,9 @@ public class SaveData : MonoBehaviour
 
     public void SaveLevel()
     {
-        if (CurrentSceneManager.instance.levelToUnlock > PlayerPrefs.GetInt("levelReached", 1))
+        if (CurrentSceneManager.Instance.LevelToUnlock > PlayerPrefs.GetInt("levelReached", 1))
         {
-            PlayerPrefs.SetInt("levelReached", CurrentSceneManager.instance.levelToUnlock);
+            PlayerPrefs.SetInt("levelReached", CurrentSceneManager.Instance.LevelToUnlock);
         }
     }
 }

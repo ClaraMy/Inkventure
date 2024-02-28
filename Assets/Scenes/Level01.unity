@@ -16152,6 +16152,41 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05d4f1a4a97f00f4c85c8ad97f822187, type: 3}
+--- !u!1 &2146801679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1340770914056033877, guid: 54bb66cdd4d308c45a37f90c8a332536, type: 3}
+  m_PrefabInstance: {fileID: 2607486260391361389}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2146801683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146801679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_PointAction: {fileID: 7618431351067064294, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_MoveAction: {fileID: 4253166235503757789, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_SubmitAction: {fileID: 6212594260114737264, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_CancelAction: {fileID: -5143458212074266102, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_LeftClickAction: {fileID: -791188135685260696, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_MiddleClickAction: {fileID: -3281978257015531524, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_RightClickAction: {fileID: 9001991366272206541, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_ScrollWheelAction: {fileID: 2927128525510337596, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -6216026161421395767, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -7920536180011774779, guid: 21ab886688bc58a459f6562a041cd763, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1001 &565792762703544492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16334,10 +16369,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5695409274085382894, guid: 54bb66cdd4d308c45a37f90c8a332536, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1340770914056033877, guid: 54bb66cdd4d308c45a37f90c8a332536, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2146801683}
   m_SourcePrefab: {fileID: 100100000, guid: 54bb66cdd4d308c45a37f90c8a332536, type: 3}
 --- !u!1001 &3453576347665677732
 PrefabInstance:
@@ -16408,16 +16447,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4912359195962369633}
     - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_ActionId
-      value: 6a4e06de-e8d6-4f50-a256-6255a4467fd0
+      value: fec46758-8fe3-4464-9fe9-7d0dce2a94d7
       objectReference: {fileID: 0}
     - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_ActionName
-      value: UI/New action
+      value: Player/Paused[/Keyboard/escape]
       objectReference: {fileID: 0}
     - target: {fileID: 6693828817592189391, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.size

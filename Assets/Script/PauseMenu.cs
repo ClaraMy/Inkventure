@@ -48,8 +48,9 @@ public class PauseMenu : MonoBehaviour
         // Update the game pause status
         m_GameIsPaused = true;
 
-        // Disable player movement while paused
-        PlayerMovement.instance.enabled = false;
+        // Disable player movement and attack while paused
+        PlayerMovement.Instance.enabled = false;
+        PlayerAttack.Instance.enabled = false;
     }
 
     /// <summary>
@@ -66,8 +67,9 @@ public class PauseMenu : MonoBehaviour
         // Update the game pause status
         m_GameIsPaused = false;
 
-        // Enable player movement
-        PlayerMovement.instance.enabled = true;
+        // Enable player movement and attack
+        PlayerMovement.Instance.enabled = true;
+        PlayerAttack.Instance.enabled = true;
     }
 
     /// <summary>

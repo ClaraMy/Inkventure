@@ -3,31 +3,58 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public int diamondsCount;
-    public Text diamondsCountText;
-    public static Inventory instance;
+    private int m_DiamondsCount;
 
-    private void Awake()
+    [SerializeField] private Text m_DiamondsCountText;
+
+    /// <summary>
+    /// Gets the singleton instance of the Inventory.
+    /// </summary>
+    #region Singleton
+    private static Inventory m_Instance;
+
+    public static Inventory Instance
     {
-        if(instance != null)
+        get
         {
-            Debug.LogWarning("Attention il y a plus d'une instance Inventory!");
-            return;
+            if (m_Instance == null)
+            {
+                m_Instance = new Inventory();
+            }
+
+            return m_Instance;
         }
-
-        instance = this;
     }
+    #endregion
 
-    public void AddDiamonds(int count)
+    /// <summary>
+    /// Adds diamonds to the inventory and updates the UI.
+    /// </summary>
+    public void AddDiamonds()
     {
-        diamondsCount += count;
-        diamondsCountText.text = "x " + diamondsCount.ToString();
+        m_DiamondsCount ++;
+        UpdateDiamondsCountText();
     }
 
+    /// <summary>
+    /// Removes diamonds from the inventory and updates the UI.
+    /// </summary>
+    /// <param name="count">The number of diamonds to remove.</param>
     public void RemoveDiamonds(int count)
     {
-        diamondsCount -= count;
-        diamondsCountText.text = "x " + diamondsCount.ToString();
+        m_DiamondsCount -= count;
+        UpdateDiamondsCountText();
+    }
+
+    /// <summary>
+    /// Updates the UI Diamond Text
+    /// </summary>
+    private void UpdateDiamondsCountText()
+    {
+        if (m_DiamondsCountText != null)
+        {
+            m_DiamondsCountText.text = "x " + m_DiamondsCount.ToString();
+        }
     }
 
 }

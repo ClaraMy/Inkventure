@@ -19,8 +19,8 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         m_TargetX = m_PosOffset.x + m_CameraOffsetX;
-        m_Player = PlayerMovement.instance.gameObject;
-        m_PlayerSprite = PlayerMovement.instance.GetComponent<SpriteRenderer>();
+        m_Player = PlayerMovement.Instance.gameObject;
+        m_PlayerSprite = PlayerMovement.Instance.GetComponent<SpriteRenderer>();
     }
  
     void Update()

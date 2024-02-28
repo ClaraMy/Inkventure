@@ -31,10 +31,10 @@ public class GameOverManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         // pour remettre son compteur de diamant à 0
-        Inventory.instance.RemoveDiamonds(CurrentSceneManager.instance.diamondsPickedUpInThisSceneCount);
+        Inventory.Instance.RemoveDiamonds(CurrentSceneManager.Instance.DiamondsPickedUpInThisSceneCount);
 
         // pour replacer le joueur au spawn
-        PlayerLife.instance.Respawn();
+        PlayerLife.Instance.Respawn();
 
         // pour réactiver les mouvements du joueur
         gameOverUI.SetActive(false);

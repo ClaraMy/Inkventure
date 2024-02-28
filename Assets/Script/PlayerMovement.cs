@@ -27,19 +27,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform m_GroundCheck;
     [SerializeField] private LayerMask m_CollisionLayers = default;
 
-    public static PlayerMovement instance;
+    /// <summary>
+    /// Gets the singleton instance of the PlayerAttack.
+    /// </summary>
+    #region Singleton
+    private static PlayerMovement m_Instance;
 
-    private void Awake()
+    public static PlayerMovement Instance
     {
-        // Check if there is more than one instance in the scene
-        if(instance != null)
+        get
         {
-            Debug.LogWarning("There is more than one instance of PlayerMovement in the scene");
-            return;
-        }
+            if (m_Instance == null)
+            {
+                m_Instance = new PlayerMovement();
+            }
 
-        instance = this;
+            return m_Instance;
+        }
     }
+    #endregion
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
