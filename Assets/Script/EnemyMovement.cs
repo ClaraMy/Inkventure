@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyPatrol : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     private int m_DestPoint = 0;
 

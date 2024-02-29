@@ -1,61 +1,70 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Linq;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    private Resolution[] m_Resolutions;
 
-    public Dropdown resolutionDropdown;
-
-    Resolution[] resolutions;
+    [SerializeField] private Dropdown m_ResolutionDropdown;
 
     public void Start()
     {
-        // pour récupérer toutes les résolutions et ne pas avoir de duplication
-        resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
-        resolutionDropdown.ClearOptions();
+        // Get all available resolutions and remove duplicates
+        m_Resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
+        m_ResolutionDropdown.ClearOptions();
 
         List<string> options = new();
 
         int currentResolutionsIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
+
+        // Loop through resolutions and add them as dropdown options
+        for (int i = 0; i < m_Resolutions.Length; i++)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
+            string option = m_Resolutions[i].width + "x" + m_Resolutions[i].height;
             options.Add(option);
 
-            // pour ajouter la résolution maximum du joueur
-            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+            // Set the index of the current resolution
+            if (m_Resolutions[i].width == Screen.width && m_Resolutions[i].height == Screen.height)
             {
                 currentResolutionsIndex = i;
             }
         }
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionsIndex;
-        resolutionDropdown.RefreshShownValue();
+        // Add resolution options to the dropdown
+        m_ResolutionDropdown.AddOptions(options);
+        // Set the current resolution in the dropdown
+        m_ResolutionDropdown.value = currentResolutionsIndex;
+        // Refresh the shown value of the dropdown
+        m_ResolutionDropdown.RefreshShownValue();
 
+        // Set fullscreen mode to true by default
         Screen.fullScreen = true;
     }
-    // pour changer les paramètres de volume
-    public void SetVolume(float volume)
-    {
-        audioMixer.SetFloat("Volume", volume);
-    }
 
+    /// <summary>
+    /// Toggles fullscreen mode.
+    /// </summary>
+    /// <param name="isFullScreen">Indicates whether to enable fullscreen mode.</param>
     public void SetFullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
     }
 
+    /// <summary>
+    /// Sets the game resolution based on the selected dropdown option.
+    /// </summary>
+    /// <param name="resolutionIndex">Index of the selected resolution option.</param>
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex];
+        Resolution resolution = m_Resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    /// <summary>
+    /// Clears all saved player preferences.
+    /// </summary>
     public void ClearSavedData()
     {
         PlayerPrefs.DeleteAll();

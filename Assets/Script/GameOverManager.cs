@@ -10,6 +10,7 @@ public class GameOverManager : MonoBehaviour
     /// </summary>
     #region Singleton
     public static GameOverManager Instance;
+
     private void Awake()
     {
         // Check if there is more than one instance in the scene

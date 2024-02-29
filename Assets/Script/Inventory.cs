@@ -11,19 +11,18 @@ public class Inventory : MonoBehaviour
     /// Gets the singleton instance of the Inventory.
     /// </summary>
     #region Singleton
-    private static Inventory m_Instance;
+    public static Inventory Instance;
 
-    public static Inventory Instance
+    private void Awake()
     {
-        get
+        // Check if there is more than one instance in the scene
+        if (Instance != null)
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new Inventory();
-            }
-
-            return m_Instance;
+            Debug.LogWarning("There is more than one instance of Inventory in the scene");
+            return;
         }
+
+        Instance = this;
     }
     #endregion
 

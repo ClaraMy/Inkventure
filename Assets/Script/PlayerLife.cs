@@ -25,6 +25,7 @@ public class PlayerLife : MonoBehaviour
     /// </summary>
     #region Singleton
     public static PlayerLife Instance;
+
     private void Awake()
     {
         // Check if there is more than one instance in the scene
@@ -37,6 +38,7 @@ public class PlayerLife : MonoBehaviour
         Instance = this;
 
     #endregion
+
         // Initialize health to the maximum value
         m_Health = MAX_HEALTH;
     }

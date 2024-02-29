@@ -9,19 +9,18 @@ public class CurrentSceneManager : MonoBehaviour
     /// Gets the singleton instance of the Inventory.
     /// </summary>
     #region Singleton
-    private static CurrentSceneManager m_Instance;
+    public static CurrentSceneManager Instance;
 
-    public static CurrentSceneManager Instance
+    private void Awake()
     {
-        get
+        // Check if there is more than one instance in the scene
+        if (Instance != null)
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new CurrentSceneManager();
-            }
-
-            return m_Instance;
+            Debug.LogWarning("There is more than one instance of CurrentSceneManager in the scene");
+            return;
         }
+
+        Instance = this;
     }
     #endregion
 }
