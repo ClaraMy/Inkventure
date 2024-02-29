@@ -153,3 +153,5 @@ MonoBehaviour:
   m_TimeOffset: 0.5
   m_CameraOffsetX: 4
   m_PosOffset: {x: 0, y: 1, z: -10}
+  m_PlayerSprite: {fileID: 0}
+  m_Player: {fileID: 4735699339527570901, guid: 5e1c2d6c9f2e63047b05c2fa65ffd3c7, type: 3}

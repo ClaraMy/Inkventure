@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2727763796136425900}
   - component: {fileID: 150797862745369367}
   - component: {fileID: 238194505085262335}
-  - component: {fileID: 5820929594834377341}
   - component: {fileID: 5255932415606156079}
   - component: {fileID: 7448407530899725009}
+  - component: {fileID: 4311627150918666288}
   m_Layer: 0
   m_Name: PigSprite
   m_TagString: Enemy
@@ -133,22 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.010006, y: 0.9515836}
   m_EdgeRadius: 0
---- !u!114 &5820929594834377341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075796622580648319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1c8f870df3d1f488e6651075cb091e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Speed: 2
-  m_Waypoints:
-  - {fileID: 8917217872835910018}
-  - {fileID: 4953473353027141337}
 --- !u!95 &5255932415606156079
 Animator:
   serializedVersion: 5
@@ -182,6 +166,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5ab7eef67d1c246998cf0af62b4ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4311627150918666288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075796622580648319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e41728e5abb92f4eabc1d1657ff135b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Speed: 2
+  m_Waypoints:
+  - {fileID: 8917217872835910018}
+  - {fileID: 4953473353027141337}
 --- !u!1 &6573524056884380445
 GameObject:
   m_ObjectHideFlags: 0

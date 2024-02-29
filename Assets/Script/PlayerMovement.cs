@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     #region Singleton
     public static PlayerMovement Instance;
+
+    public PlayerMovement(LayerMask collisionLayers)
+    {
+        m_CollisionLayers = collisionLayers;
+    }
 
     private void Awake()
     {

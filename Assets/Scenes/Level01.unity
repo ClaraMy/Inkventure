@@ -5502,6 +5502,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05d4f1a4a97f00f4c85c8ad97f822187, type: 3}
+--- !u!1001 &722354415
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.009205
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.9177613
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315723176634093173, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644485247315259613, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: sceneName
+      value: LevelSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644485247315259613, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_FadeSystem
+      value: 
+      objectReference: {fileID: 1908958862}
+    - target: {fileID: 2305419997428769921, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
+      propertyPath: m_Name
+      value: DoorNext
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
 --- !u!1 &762697138
 GameObject:
   m_ObjectHideFlags: 0
@@ -16105,6 +16170,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!95 &1908958862 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6722006320200073572, guid: f985d9f9a4aef654a872943334e8c127, type: 3}
+  m_PrefabInstance: {fileID: 8955654677642537637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2097333817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16210,10 +16280,6 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 3863662639270252056, guid: c089fb48fbafc624badd21564aa6d29a, type: 3}
-      propertyPath: pauseMenuUI
-      value: 
-      objectReference: {fileID: 650897527}
-    - target: {fileID: 3863662639270252056, guid: c089fb48fbafc624badd21564aa6d29a, type: 3}
       propertyPath: m_PauseMenuUI
       value: 
       objectReference: {fileID: 650897527}
@@ -16257,10 +16323,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7762064533120616520, guid: c089fb48fbafc624badd21564aa6d29a, type: 3}
-      propertyPath: gameOverUI
-      value: 
-      objectReference: {fileID: 960417773}
     - target: {fileID: 7762064533120616520, guid: c089fb48fbafc624badd21564aa6d29a, type: 3}
       propertyPath: m_GameOverUI
       value: 
@@ -16552,6 +16614,10 @@ PrefabInstance:
       value: CurrentSceneManager
       objectReference: {fileID: 0}
     - target: {fileID: 2435909819948230205, guid: cfe6647af5c48b4419671a9154ba9e94, type: 3}
+      propertyPath: LevelToUnlock
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2435909819948230205, guid: cfe6647af5c48b4419671a9154ba9e94, type: 3}
       propertyPath: levelToUnlock
       value: 2
       objectReference: {fileID: 0}
@@ -16744,3 +16810,4 @@ SceneRoots:
   - {fileID: 521858196}
   - {fileID: 24591162}
   - {fileID: 713565706}
+  - {fileID: 722354415}
