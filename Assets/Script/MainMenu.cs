@@ -3,24 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsWindow;
+    [SerializeField] private GameObject m_SettingsWindow;
 
-    public void StartGameButton()
+    public void StartGame()
     {
         SceneManager.LoadScene("LevelSelect");
     }
 
-    public void SettingsButton()
+    public void Settings()
     {
-        settingsWindow.SetActive(true);
+        m_SettingsWindow.SetActive(true);
     }
 
     public void CloseSettingsWindow()
     {
-        settingsWindow.SetActive(false);
+        m_SettingsWindow.SetActive(false);
     }
 
-    public void QuitGameButton()
+    public void Quit()
     {
         Application.Quit();
     }

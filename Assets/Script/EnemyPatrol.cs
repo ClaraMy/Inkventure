@@ -2,44 +2,58 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
+    private int m_DestPoint = 0;
+
     [SerializeField] private float m_Speed = 2.0f;
-    [SerializeField] private Transform[] waypoints;
 
-    public SpriteRenderer pig1;
-    private Transform target;
-    private int destPoint = 0;
-    private EnemyLife enemyLife;
+    private SpriteRenderer m_SpriteRenderer;
+    private Transform m_Target;
+    private EnemyLife m_EnemyLife;
 
-    // Start is called before the first frame update
+    [SerializeField] private Transform[] m_Waypoints;
+
     void Start()
     {
-        target = waypoints[0];
-        enemyLife = GetComponent<EnemyLife>();
+        m_Target = m_Waypoints[0];
+        m_EnemyLife = GetComponent<EnemyLife>();
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (enemyLife.IsAlive())
+        // Check if the enemy is alive
+        if (m_EnemyLife.IsAlive())
         {
-            Vector3 dir = target.position - transform.position;
+            // Move towards the current target waypoint
+            Vector3 dir = m_Target.position - transform.position;
             transform.Translate(dir.normalized * m_Speed * Time.deltaTime, Space.World);
 
-            // Si l'ennemi est presque arrivé à sa destination
-            if (Vector3.Distance(transform.position, target.position) < 0.3f)
+            // If the enemy is close to its destination waypoint
+            if (Vector3.Distance(transform.position, m_Target.position) < 0.3f)
             {
-                destPoint = (destPoint + 1) % waypoints.Length;
-                target = waypoints[destPoint];
-                pig1.flipX = !pig1.flipX;
+                // Switch to the next waypoint in the array
+                m_DestPoint = (m_DestPoint + 1) % m_Waypoints.Length;
+                m_Target = m_Waypoints[m_DestPoint];
+
+                // Flip the sprite horizontally to change direction
+                m_SpriteRenderer.flipX = !m_SpriteRenderer.flipX;
             }
         }
     }
 
+    /// <summary>
+    /// Called when a collider enters this trigger collider.
+    /// </summary>
+    /// <param name="collision">The collider that entered this trigger collider.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Check if the collider belongs to an object tagged as "Player"
         if (collision.transform.CompareTag("Player"))
         {
+            // Get the PlayerLife component from the collided player
             PlayerLife playerLife = collision.transform.GetComponent<PlayerLife>();
+
+            // Call the TakeDamage method of the player's PlayerLife component
             playerLife.TakeDamage();
         }
     }

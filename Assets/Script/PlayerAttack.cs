@@ -21,19 +21,18 @@ public class PlayerAttack : MonoBehaviour
     /// Gets the singleton instance of the PlayerAttack.
     /// </summary>
     #region Singleton
-    private static PlayerAttack m_Instance;
+    public static PlayerAttack Instance;
 
-    public static PlayerAttack Instance
+    private void Awake()
     {
-        get
+        // Check if there is more than one instance in the scene
+        if (Instance != null)
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new PlayerAttack();
-            }
-
-            return m_Instance;
+            Debug.LogWarning("There is more than one instance of PlayerAttack in the scene");
+            return;
         }
+
+        Instance = this;
     }
     #endregion
 

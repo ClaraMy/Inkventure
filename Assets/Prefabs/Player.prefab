@@ -184,14 +184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79aa0e1b65ff44843aff9eb6bbe1c654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InvincibilityDelay: 2
+  m_InvincibilityAnimationDelay: 0.8
   m_Hearts:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   m_FullHeart: {fileID: -1802382856, guid: e87741b96f5c327489e674a73aa2baa1, type: 3}
   m_EmptyHeart: {fileID: 21300000, guid: 2c73ba66fb27c614d981bbcf843e4968, type: 3}
-  m_InvincibilityDelay: 2
-  m_InvincibilityAnimationDelay: 0.8
 --- !u!95 &3781780047648358331
 Animator:
   serializedVersion: 5
@@ -260,9 +260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487ee7331d18b2d48a8f58ede87e57df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToAttack: 0.25
-  RightAttackArea: {fileID: 7902827879006880125}
-  LeftAttackArea: {fileID: 8937746599816446219}
+  m_TimeToAttack: 0.25
+  m_RightAttackArea: {fileID: 7902827879006880125}
+  m_LeftAttackArea: {fileID: 8937746599816446219}
 --- !u!114 &6693828817592189391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +376,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b3e8b35e-a6eb-4800-9a75-79ce08572245
     m_ActionName: Player/Attack[/Mouse/leftButton,/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ReadPauseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fec46758-8fe3-4464-9fe9-7d0dce2a94d7
+    m_ActionName: Player/Paused[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

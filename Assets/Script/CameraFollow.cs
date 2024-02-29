@@ -12,15 +12,12 @@ public class CameraFollow : MonoBehaviour
     private Vector3 m_Velocity;
 
     [SerializeField] private Vector3 m_PosOffset = new(0f, 1f, -10f);
-
-    private SpriteRenderer m_PlayerSprite;
-    private GameObject m_Player;
+    [SerializeField] private SpriteRenderer m_PlayerSprite;
+    [SerializeField] private GameObject m_Player;
 
     private void Start()
     {
         m_TargetX = m_PosOffset.x + m_CameraOffsetX;
-        m_Player = PlayerMovement.Instance.gameObject;
-        m_PlayerSprite = PlayerMovement.Instance.GetComponent<SpriteRenderer>();
     }
  
     void Update()

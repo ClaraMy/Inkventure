@@ -3,48 +3,63 @@ using UnityEngine.SceneManagement;
 
 public class GameOverManager : MonoBehaviour
 {
-    public GameObject gameOverUI;
-    public static GameOverManager instance;
+    [SerializeField] private GameObject m_GameOverUI;
 
+    /// <summary>
+    /// Gets the singleton instance of the GameOverManager.
+    /// </summary>
+    #region Singleton
+    public static GameOverManager Instance;
     private void Awake()
     {
-        // pour vérifier qu'il n'y a qu'une seule instance de GameOverManager dans la scène
-        if (instance == null)
+        // Check if there is more than one instance in the scene
+        if (Instance != null)
         {
-            instance = this;
+            Debug.LogWarning("There is more than one instance of GameOverManager in the scene");
+            return;
         }
-        else
-        {
-            Debug.LogWarning("Attention, il y a plus d'une instance de GameOverManager dans la scène");
-            Destroy(gameObject);
-        }
-    }
 
+        Instance = this;
+    }
+    #endregion
+
+    /// <summary>
+    /// Activates the game over UI.
+    /// </summary>
     public void OnPlayerDeath()
     {
-        gameOverUI.SetActive(true);
+        m_GameOverUI.SetActive(true);
     }
 
+    /// <summary>
+    /// Restarts the game when the player chooses to retry.
+    /// </summary>
     public void Retry()
     {
-        // pour recharger la scène
+        // Reloads the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        // pour remettre son compteur de diamant à 0
+        // Resets the diamond count to zero
         Inventory.Instance.RemoveDiamonds(CurrentSceneManager.Instance.DiamondsPickedUpInThisSceneCount);
 
-        // pour replacer le joueur au spawn
+        // Respawns the player at the spawn point
         PlayerLife.Instance.Respawn();
 
-        // pour réactiver les mouvements du joueur
-        gameOverUI.SetActive(false);
+        // Reactivates player movements
+        m_GameOverUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Return to the main menu.
+    /// </summary>
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
+    /// <summary>
+    /// Quit the game.
+    /// </summary>
     public void Quit()
     {
         Application.Quit();

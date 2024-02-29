@@ -21,29 +21,28 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 m_MoveVector;
 
     private Animator m_Animator;
-    private SpriteRenderer m_SpriteRenderer;
     private Rigidbody2D m_Rigidbody;
+    private SpriteRenderer m_SpriteRenderer;
 
     [SerializeField] private Transform m_GroundCheck;
     [SerializeField] private LayerMask m_CollisionLayers = default;
 
     /// <summary>
-    /// Gets the singleton instance of the PlayerAttack.
+    /// Gets the singleton instance of the PlayerMovement.
     /// </summary>
     #region Singleton
-    private static PlayerMovement m_Instance;
+    public static PlayerMovement Instance;
 
-    public static PlayerMovement Instance
+    private void Awake()
     {
-        get
+        // Check if there is more than one instance in the scene
+        if (Instance != null)
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new PlayerMovement();
-            }
-
-            return m_Instance;
+            Debug.LogWarning("There is more than one instance of PlayerMovement in the scene");
+            return;
         }
+
+        Instance = this;
     }
     #endregion
     void Start()

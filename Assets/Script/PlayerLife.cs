@@ -24,26 +24,23 @@ public class PlayerLife : MonoBehaviour
     /// Gets the singleton instance of the PlayerLife.
     /// </summary>
     #region Singleton
-    private static PlayerLife m_Instance;
-
-    public static PlayerLife Instance
-    {
-        get
-        {
-            if (m_Instance == null)
-            {
-                m_Instance = new PlayerLife();
-            }
-
-            return m_Instance;
-        }
-    }
-    #endregion
+    public static PlayerLife Instance;
     private void Awake()
     {
+        // Check if there is more than one instance in the scene
+        if (Instance != null)
+        {
+            Debug.LogWarning("There is more than one instance of PlayerLife in the scene");
+            return;
+        }
+
+        Instance = this;
+
+    #endregion
         // Initialize health to the maximum value
         m_Health = MAX_HEALTH;
     }
+    
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
@@ -108,7 +105,7 @@ public class PlayerLife : MonoBehaviour
         m_Rigidbody.velocity = Vector3.zero;
 
         // Call Game Over function
-        GameOverManager.instance.OnPlayerDeath();
+        GameOverManager.Instance.OnPlayerDeath();
     }
 
     /// <summary>

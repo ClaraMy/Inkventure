@@ -4,21 +4,28 @@ using UnityEngine.UI;
 
 public class LevelSelector : MonoBehaviour
 {
-
-    public Button[] levelButtons;
+    [SerializeField] private Button[] m_LevelButtons;
 
     private void Start()
     {
+        // Retrieve the level reached by the player from PlayerPrefs
         int levelReached = PlayerPrefs.GetInt("levelReached", 1);
 
-        for (int i = 0; i < levelButtons.Length; i++)
+        // Loop through the level buttons
+        for (int i = 0; i < m_LevelButtons.Length; i++)
         {
+            // Disable buttons for levels beyond the reached level
             if (i+1 > levelReached)
             {
-                levelButtons[i].interactable = false;
+                m_LevelButtons[i].interactable = false;
             }
         }
     }
+
+    /// <summary>
+    /// Loads the specified level.
+    /// </summary>
+    /// <param name="levelName">Name of the level to load.</param>
     public void LoadLevelPassed(string levelName)
     {
         SceneManager.LoadScene(levelName);
