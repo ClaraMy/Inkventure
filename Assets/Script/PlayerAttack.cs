@@ -7,9 +7,6 @@ using static UnityEngine.GraphicsBuffer;
 public class PlayerAttack : MonoBehaviour
 {
     private bool m_IsAttacking = false;
-    private float m_Timer = 0f;
-
-    [SerializeField] private float m_TimeToAttack = 0.25f;
 
     private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
@@ -40,27 +37,6 @@ public class PlayerAttack : MonoBehaviour
     {
         m_Animator = GetComponent<Animator>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    void Update()
-    {
-        // If the player is currently attacking, keep track of the time elapsed since the start of the attack
-        if (m_IsAttacking)
-        {
-            m_Timer += Time.deltaTime;
-
-            // If the time to attack has elapsed, reset the attack parameters
-            if (m_Timer >= m_TimeToAttack)
-            {
-                m_Timer = 0;
-                m_IsAttacking = false;
-
-                // Deactivate attack colliders and update animator parameter
-                m_RightAttackArea.SetActive(m_IsAttacking);
-                m_LeftAttackArea.SetActive(m_IsAttacking);
-                m_Animator.SetBool("IsAttacking", m_IsAttacking);
-            }
-        }
     }
 
     /// <summary>
@@ -95,5 +71,19 @@ public class PlayerAttack : MonoBehaviour
         {
             m_LeftAttackArea.SetActive(m_IsAttacking);
         }
+    }
+
+    /// <summary>
+    /// Called by an animation event when the attack animation is finished.
+    /// Resets the attack state and deactivates attack colliders.
+    /// </summary>
+    public void AttackAnimationEnd()
+    {
+        m_IsAttacking = false;
+
+        // Deactivate attack colliders and update animator parameter
+        m_RightAttackArea.SetActive(m_IsAttacking);
+        m_LeftAttackArea.SetActive(m_IsAttacking);
+        m_Animator.SetBool("IsAttacking", m_IsAttacking);
     }
 }
