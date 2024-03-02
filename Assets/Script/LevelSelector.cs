@@ -31,5 +31,14 @@ public class LevelSelector : MonoBehaviour
         SceneManager.LoadScene(levelName);
     }
 
+    /// <summary>
+    /// Return to the main menu.
+    /// </summary>
+    public void MainMenu()
+    {
+        // Load the main menu scene
+        SceneManager.LoadScene("MainMenu");
+    }
+
 
 }
