@@ -9,7 +9,7 @@ public class PlayerLife : MonoBehaviour
 
     private bool m_IsInvincible = false;
 
-    [SerializeField] private float m_InvincibilityDelay = 2f;
+    [SerializeField] private float m_InvincibilityDelay = 1f;
     [SerializeField] private float m_InvincibilityAnimationDelay = 0.8f;
 
     private Animator m_Animator;

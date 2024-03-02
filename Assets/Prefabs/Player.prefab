@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79aa0e1b65ff44843aff9eb6bbe1c654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InvincibilityDelay: 2
+  m_InvincibilityDelay: 1
   m_InvincibilityAnimationDelay: 0.8
   m_Hearts:
   - {fileID: 0}
@@ -245,8 +245,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.15332937, y: -0.09545553}
-  m_Size: {x: 1.1940718, y: 1.5889962}
+  m_Offset: {x: 0.13837314, y: -0.21951509}
+  m_Size: {x: 1.0893779, y: 1.4156575}
   m_Direction: 0
 --- !u!114 &2290145330879741242
 MonoBehaviour:
@@ -260,7 +260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487ee7331d18b2d48a8f58ede87e57df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TimeToAttack: 0.25
   m_RightAttackArea: {fileID: 7902827879006880125}
   m_LeftAttackArea: {fileID: 8937746599816446219}
 --- !u!114 &6693828817592189391
