@@ -391,8 +391,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fec46758-8fe3-4464-9fe9-7d0dce2a94d7
     m_ActionName: Player/Paused[/Keyboard/escape]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
