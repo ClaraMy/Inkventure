@@ -4,12 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadLevelSelector : MonoBehaviour
 {
-    private Animator m_FadeSystem;
-
-    private void Awake()
-    {
-        m_FadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
-    }
+    [SerializeField] private Animator m_FadeSystem;
 
     /// <summary>
     /// Called when a collider enters this trigger collider.

@@ -5977,10 +5977,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1644485247315259613, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
-      propertyPath: sceneName
-      value: LevelSelect
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644485247315259613, guid: 6ac97ba652458fb4eb55b274aeb64f4c, type: 3}
       propertyPath: m_FadeSystem
       value: 
       objectReference: {fileID: 1908958862}
