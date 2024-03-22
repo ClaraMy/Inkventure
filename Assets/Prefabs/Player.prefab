@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487ee7331d18b2d48a8f58ede87e57df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AttackAnimationDuration: 0.2
   m_RightAttackArea: {fileID: 7902827879006880125}
   m_LeftAttackArea: {fileID: 8937746599816446219}
 --- !u!114 &6693828817592189391

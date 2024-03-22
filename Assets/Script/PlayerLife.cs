@@ -85,8 +85,8 @@ public class PlayerLife : MonoBehaviour
 
             // Make the player temporarily invincible
             m_IsInvincible = true;
-            StartCoroutine(InvincibilityFlash());
-            StartCoroutine(HandleInvincibilityDelay());
+            StartCoroutine(InvincibilityFlash(m_InvincibilityAnimationDelay));
+            StartCoroutine(HandleInvincibilityDelay(m_InvincibilityDelay));
         }
     }
 
@@ -132,14 +132,14 @@ public class PlayerLife : MonoBehaviour
     /// <summary>
     /// Flashes the player to indicate invincibility.
     /// </summary>
-    public IEnumerator InvincibilityFlash()
+    public IEnumerator InvincibilityFlash(float delay)
     {
         if (m_IsInvincible)
         {
             if (m_Animator != null)
             {
                 m_Animator.SetBool("IsInvincible", true);
-                yield return new WaitForSeconds(m_InvincibilityAnimationDelay);
+                yield return new WaitForSeconds(delay);
                 m_Animator.SetBool("IsInvincible", false);
             }
         }
@@ -148,9 +148,9 @@ public class PlayerLife : MonoBehaviour
     /// <summary>
     /// Handles the delay for player invincibility.
     /// </summary>
-    public IEnumerator HandleInvincibilityDelay()
+    public IEnumerator HandleInvincibilityDelay(float delay)
     {
-        yield return new WaitForSeconds(m_InvincibilityDelay);
+        yield return new WaitForSeconds(delay);
         m_IsInvincible = false;
     }
 

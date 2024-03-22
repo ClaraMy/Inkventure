@@ -1,12 +1,14 @@
 using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 using UnityEngine.Timeline;
 using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAttack : MonoBehaviour
 {
     private bool m_IsAttacking = false;
+    [SerializeField] private float m_AttackAnimationDuration = 0.2f;
 
     private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
@@ -71,17 +73,18 @@ public class PlayerAttack : MonoBehaviour
         {
             m_LeftAttackArea.SetActive(m_IsAttacking);
         }
+
+        StartCoroutine(EndAttackAfterDelay(m_AttackAnimationDuration));
     }
 
     /// <summary>
-    /// Called by an animation event when the attack animation is finished.
     /// Resets the attack state and deactivates attack colliders.
     /// </summary>
-    public void AttackAnimationEnd()
+    private IEnumerator EndAttackAfterDelay(float delay)
     {
-        m_IsAttacking = false;
+        yield return new WaitForSeconds(delay);
 
-        // Deactivate attack colliders and update animator parameter
+        m_IsAttacking = false;
         m_RightAttackArea.SetActive(m_IsAttacking);
         m_LeftAttackArea.SetActive(m_IsAttacking);
         m_Animator.SetBool("IsAttacking", m_IsAttacking);
