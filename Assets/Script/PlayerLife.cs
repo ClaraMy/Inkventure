@@ -5,6 +5,7 @@ using System.Collections;
 public class PlayerLife : MonoBehaviour
 {
     private const int MAX_HEALTH = 3;
+    private const string IS_INVINCIBLE_PARAM = "IsInvincible";
     private static int m_Health;
 
     private bool m_IsInvincible = false;
@@ -138,9 +139,9 @@ public class PlayerLife : MonoBehaviour
         {
             if (m_Animator != null)
             {
-                m_Animator.SetBool("IsInvincible", true);
+                m_Animator.SetBool(IS_INVINCIBLE_PARAM, true);
                 yield return new WaitForSeconds(delay);
-                m_Animator.SetBool("IsInvincible", false);
+                m_Animator.SetBool(IS_INVINCIBLE_PARAM, false);
             }
         }
     }

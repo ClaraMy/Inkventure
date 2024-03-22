@@ -7,7 +7,10 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private const string IS_ATTACKING_PARAM = "IsAttacking";
+
     private bool m_IsAttacking = false;
+
     [SerializeField] private float m_AttackAnimationDuration = 0.2f;
 
     private Animator m_Animator;
@@ -61,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
         m_IsAttacking = true;
 
         // Update animator parameter to trigger attack animation
-        m_Animator.SetBool("IsAttacking", m_IsAttacking);
+        m_Animator.SetBool(IS_ATTACKING_PARAM, m_IsAttacking);
 
         // Determine the direction of the attack based on the player's facing direction
         if (m_SpriteRenderer.flipX == false)
@@ -87,6 +90,6 @@ public class PlayerAttack : MonoBehaviour
         m_IsAttacking = false;
         m_RightAttackArea.SetActive(m_IsAttacking);
         m_LeftAttackArea.SetActive(m_IsAttacking);
-        m_Animator.SetBool("IsAttacking", m_IsAttacking);
+        m_Animator.SetBool(IS_ATTACKING_PARAM, m_IsAttacking);
     }
 }
