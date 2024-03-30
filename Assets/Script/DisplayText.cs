@@ -11,6 +11,12 @@ public class DisplayText : MonoBehaviour
     {
         m_JoystickNames = Input.GetJoystickNames();
     }
+
+    /// <summary>
+    /// Called when the Collider2D component enters another collider trigger.
+    /// Enables the appropriate UI text based on the presence of a gamepad.
+    /// </summary>
+    /// <param name="collision">The Collider2D that triggered the event.</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -25,6 +31,11 @@ public class DisplayText : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when the Collider2D component exits another collider trigger.
+    /// Disables the appropriate UI text based on the presence of a gamepad.
+    /// </summary>
+    /// <param name="collision">The Collider2D that triggered the event.</param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

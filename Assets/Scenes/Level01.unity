@@ -5332,7 +5332,7 @@ GameObject:
   - component: {fileID: 553950702}
   - component: {fileID: 553950704}
   - component: {fileID: 553950705}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6167,7 +6167,7 @@ GameObject:
   - component: {fileID: 762697142}
   - component: {fileID: 762697144}
   - component: {fileID: 762697143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

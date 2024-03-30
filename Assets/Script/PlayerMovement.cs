@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float m_HorizontalInput;
 
     [SerializeField] private float m_Speed = 7.0f;
-    [SerializeField] private float m_JumpHeight = 7.0f;
+    [SerializeField] private float m_JumpHeight = 3.5f;
     [SerializeField] private float m_TurnSmoothTime = 0.1f;
     [SerializeField] private float m_GroundCheckRadius = 0.5f;
 
@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         // Calculate and apply jump velocity
-        m_JumpVelocity += Mathf.Sqrt(m_JumpHeight * -GRAVITY_VALUE);
+        m_JumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(GRAVITY_VALUE) * m_JumpHeight);
     }
 
     /// <summary>
