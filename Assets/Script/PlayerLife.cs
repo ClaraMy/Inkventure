@@ -2,18 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerLife : MonoBehaviour
+public class PlayerLife : CharacterLife
 {
-    private const int MAX_HEALTH = 3;
+    private new const int MAX_HEALTH = 3;
     private const string IS_INVINCIBLE_PARAM = "IsInvincible";
-    private static int m_Health;
-
+    
     private bool m_IsInvincible = false;
 
     [SerializeField] private float m_InvincibilityDelay = 1f;
     [SerializeField] private float m_InvincibilityAnimationDelay = 0.8f;
 
-    private Animator m_Animator;
     private CapsuleCollider2D m_PlayerCollider;
     private Rigidbody2D m_Rigidbody;
 
@@ -27,8 +25,9 @@ public class PlayerLife : MonoBehaviour
     #region Singleton
     public static PlayerLife Instance;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         // Check if there is more than one instance in the scene
         if (Instance != null)
         {
@@ -39,15 +38,13 @@ public class PlayerLife : MonoBehaviour
         Instance = this;
 
     #endregion
-
-        // Initialize health to the maximum value
-        m_Health = MAX_HEALTH;
     }
-    
-    private void Start()
+
+    protected override void Start()
     {
+        base.Start();
+
         m_Rigidbody = GetComponent<Rigidbody2D>();
-        m_Animator = GetComponent<Animator>();
         m_PlayerCollider = GetComponent<CapsuleCollider2D>();
     }
 
@@ -68,21 +65,14 @@ public class PlayerLife : MonoBehaviour
     /// <summary>
     /// Deals damage to the player.
     /// </summary>
-    public void TakeDamage()
+    public override void TakeDamage()
     {
         if (!m_IsInvincible)
         {
-            m_Health -= 1;
+            base.TakeDamage();
 
             // Disable player attack while player's taking damage
             PlayerAttack.Instance.enabled = false;
-
-            // Check if the player is still alive
-            if (m_Health == 0)
-            {
-                Die();
-                return;
-            }
 
             // Make the player temporarily invincible
             m_IsInvincible = true;
@@ -94,17 +84,20 @@ public class PlayerLife : MonoBehaviour
     /// <summary>
     /// Handles the death of the player.
     /// </summary>
-    public void Die()
+    public override void Die()
     {
         // Disable player movement
         PlayerMovement.Instance.enabled = false;
 
+        // Disable player attack
+        PlayerAttack.Instance.enabled = false;
+
         // Trigger death animation
-        m_Animator.SetTrigger("Die");
+        TriggerDeathAnimation("Die");
 
         // Disable interaction with the environment
+        DisableCollider(m_PlayerCollider);
         m_Rigidbody.bodyType = RigidbodyType2D.Kinematic;
-        m_PlayerCollider.enabled = false;
         m_Rigidbody.velocity = Vector3.zero;
 
         // Call Game Over function
