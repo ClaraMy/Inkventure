@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerLife : CharacterLife
 {
-    private new const int MAX_HEALTH = 3;
+    private const int MAX_HEALTH = 3;
     private const string IS_INVINCIBLE_PARAM = "IsInvincible";
     
     private bool m_IsInvincible = false;
@@ -25,9 +25,11 @@ public class PlayerLife : CharacterLife
     #region Singleton
     public static PlayerLife Instance;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        // Initialize health to the maximum value
+        m_Health = MAX_HEALTH;
+
         // Check if there is more than one instance in the scene
         if (Instance != null)
         {

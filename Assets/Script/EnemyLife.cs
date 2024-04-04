@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EnemyLife : CharacterLife
 {
-    
+    private new int m_Health = 1;
+
     private bool m_IsAlive = true;
 
     private BoxCollider2D m_EnemyCollider;

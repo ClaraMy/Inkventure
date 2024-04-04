@@ -2,15 +2,9 @@ using UnityEngine;
 using System.Collections;
 public abstract class CharacterLife : MonoBehaviour
 {
-    protected const int MAX_HEALTH = 1;
     protected int m_Health;
 
     protected Animator m_Animator;
-    protected virtual void Awake()
-    {
-        // Initialize health to the maximum value
-        m_Health = MAX_HEALTH;
-    }
 
     protected virtual void Start()
     {
