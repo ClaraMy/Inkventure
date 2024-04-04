@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 7
-  m_JumpHeight: 3.9
+  m_JumpHeight: 4
   m_TurnSmoothTime: 0.1
   m_GroundCheckRadius: 0.5
   m_GroundCheck: {fileID: 3752764378821990003}
